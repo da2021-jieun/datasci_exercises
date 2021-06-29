@@ -29,7 +29,8 @@ train.Date= pd.to_datetime(train.Date)
 test.Date= pd.to_datetime(test.Date)
 
 ### ==================================================
-### Add a new column: `Week`
+### Add new columns: `Year`,`Week`
+feat_stor["Year"]= feat_stor.Date.dt.isocalendar().year
 feat_stor["Week"]= feat_stor.Date.dt.isocalendar().week
 
 ### ==================================================
@@ -38,7 +39,7 @@ train_detail= train.merge(feat_stor,how="inner",on=["Store","Date","IsHoliday"])
 
 test_detail= test.merge(feat_stor,how="inner",on=["Store","Date","IsHoliday"]).sort_values(by=["Store","Dept","Date"]).reset_index(drop=True)
 
-del features,stores,train,test
+# del features,stores,train,test
 
 ### ==================================================
 ### Check null values
@@ -56,6 +57,51 @@ null_data_df= null_data_df[null_data_df["# null"]!=0]
 null_data_df
 
 ### ==================================================
+### Find the week number and day that the four major holidays fall on
 from pandasql import sqldf
 pysql= lambda q: sqldf(q,globals())
 
+pysql(
+    """SELECT T.*,
+    case 
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 1 then 'Super Bowl'
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 2 then 'Labor Day'
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 3 then 'Thanksgiving'
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 4 then 'Christmas'
+    end as Holiday,
+    case
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 1 then 'Sunday'
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 2 then 'Monday'
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 3 then 'Thursday'
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 4 and Year = 2010 then 'Saturday'
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 4 and Year = 2011 then 'Sunday'
+    when ROW_NUMBER() OVER(partition by Year order by Week) = 4 and Year = 2012 then 'Thuesday'
+    end as Day
+    from 
+        (SELECT DISTINCT Year,Week,
+            case when Date <= '2012-11-01' then 'Train Data' else 'Test Data' end as Data_type
+        FROM feat_stor
+        WHERE IsHoliday = True) as T""")
+
+### ==================================================
+### Check average weekly sales per year
+import numpy as np 
+import matplotlib.pyplot as plt 
+import seaborn as sns
+plt.style.use("ggplot")
+sns.set_style("darkgrid") #whitegrid
+weekly_sales_2010= train_detail[train_detail.Year==2010].Weekly_Sales.groupby(train_detail.Week).mean()
+weekly_sales_2011= train_detail[train_detail.Year==2011].Weekly_Sales.groupby(train_detail.Week).mean()
+weekly_sales_2012= train_detail[train_detail.Year==2012].Weekly_Sales.groupby(train_detail.Week).mean()
+plt.figure(figsize=(10,5))
+sns.lineplot(x=weekly_sales_2010.index,y=weekly_sales_2010.values)
+sns.lineplot(x=weekly_sales_2011.index,y=weekly_sales_2011.values)
+sns.lineplot(x=weekly_sales_2012.index,y=weekly_sales_2012.values)
+plt.grid()
+plt.xticks(np.arange(1,53))
+plt.legend(["2010","2011","2012"],loc="best",fontsize=11)
+plt.title("Average Weekly Sales, 2010-2012",fontsize=12)
+plt.ylabel("sales")
+plt.xlabel("week")
+plt.tight_layout()
+plt.show()
