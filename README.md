@@ -1,2 +1,6 @@
-# datasci_exercises
-data science exercises by topics
+# data science exercises by techniques/topics
+
+## Regression
+## Classification
+## Etc.
+
