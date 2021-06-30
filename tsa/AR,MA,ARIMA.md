@@ -12,7 +12,7 @@
 - Autoregression models the next step in the sequence as a linear function of the **observations** at prior time steps.
 - `AR(p)` where p is the order of the model; AR(1) is a first-order AR model
 - Suitable for univariate timeseries without trend and seasonality
-![autoregression,AR_model](1_autoregression,AR_model.png)
+- ![autoregression,AR_model](1_autoregression,AR_model.png)
 
 
 ## Moving Average, MA
