@@ -6,7 +6,8 @@
 2. Moving Average, MA
 3. Autoregressive Moving Average, ARMA
 4. Autoregressive Integrated Moving Average, ARIMA
-- Example code: https://github.com/da2021-jieun/datasci_exercises/blob/main/tsa/AR%2CMA%2CARIMA.py
+- Example code[1]
+[1]: https://github.com/da2021-jieun/datasci_exercises/blob/main/tsa/AR%2CMA%2CARIMA.py
 
 
 ## Autoregression, AR
