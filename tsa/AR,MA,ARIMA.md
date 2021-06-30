@@ -21,6 +21,8 @@
 - `MA(q)` where q is the order of the model; MA(1) is a first-order MA model
 - Suitable for univariate timeseries without trend and seasonality
 
+![moving_average, MA_model](2_moving_average_model.png)
+
 
 ## Autoregressive Moving Average, ARMA
 - It models the next step in the sequence as a linear function of (i) the observations and (ii) residual errors at prior time steps.
@@ -28,9 +30,13 @@
 - `ARMA(p,q)`
 - Suitable for univariate time series without trend and seasonality
 
+![ARMA_model](3_ARMA_model.png)
+
 
 ## Autoregressive Integrated Moving Average, ARIMA
 - It models the next step in the sequence as a linear function of (i) the **differenced** observations and (ii) residual errors at prior time steps.
 - Combines AR and MA models and adds a preprocessing step of differencing, aka integration, to make the sequence stationary
 - `AR(p), I(d), MA(q)`
 - Suitable for univariate time series with trend and without seasonality
+
+![ARIMA_model](4_ARIMA_model.png)
