@@ -6,8 +6,6 @@
 2. Moving Average, MA
 3. Autoregressive Moving Average, ARMA
 4. Autoregressive Integrated Moving Average, ARIMA
-- [Example code](https://github.com/da2021-jieun/datasci_exercises/blob/main/tsa/AR%2CMA%2CARIMA.py)
-
 
 ## Autoregression, AR
 - Autoregression models the next step in the sequence as a linear function of the **observations** at prior time steps.
@@ -15,6 +13,7 @@
 - Suitable for univariate timeseries without trend and seasonality
 
 ![autoregression,AR_model](1_autoregression,AR_model.png)
+- [Example code](https://github.com/da2021-jieun/datasci_exercises/blob/main/tsa/AR%2CMA%2CARIMA.py)
 
 
 ## Moving Average, MA
@@ -23,6 +22,7 @@
 - Suitable for univariate timeseries without trend and seasonality
 
 ![moving_average, MA_model](2_moving_average_model.png)
+- [Example code](https://github.com/da2021-jieun/datasci_exercises/blob/main/tsa/AR%2CMA%2CARIMA.py)
 
 
 ## Autoregressive Moving Average, ARMA
@@ -32,6 +32,7 @@
 - Suitable for univariate time series without trend and seasonality
 
 ![ARMA_model](3_ARMA_model.png)
+- [Example code](https://github.com/da2021-jieun/datasci_exercises/blob/main/tsa/AR%2CMA%2CARIMA.py)
 
 
 ## Autoregressive Integrated Moving Average, ARIMA
@@ -41,3 +42,4 @@
 - Suitable for univariate time series with trend and without seasonality
 
 ![ARIMA_model](4_ARIMA_model.png)
+- [Example code](https://github.com/da2021-jieun/datasci_exercises/blob/main/tsa/AR%2CMA%2CARIMA.py)
