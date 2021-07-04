@@ -116,11 +116,7 @@ from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
 
-from sklearn.decomposition import PCA
-
-from sklearn.model_selection import cross_val_score,cross_validate,RandomizedSearchCV,train_test_split, KFold
-
-from sklearn.metrics import plot_confusion_matrix
+from sklearn.model_selection import cross_validate,train_test_split, KFold
 
 clf_cb= GradientBoostingClassifier(random_state=0)
 clf_kn= KNeighborsClassifier()
