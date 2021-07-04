@@ -116,8 +116,6 @@ from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
 
-from sklearn.model_selection import cross_validate,train_test_split, KFold
-
 clf_cb= GradientBoostingClassifier(random_state=0)
 clf_kn= KNeighborsClassifier()
 clf_dt= DecisionTreeClassifier(random_state=0)
@@ -128,6 +126,9 @@ clf_gnb= GaussianNB()
 clf_xgb= XGBClassifier()
 clf_lgbm= LGBMClassifier()
 clf_catb= CatBoostClassifier()
+
+
+from sklearn.model_selection import KFold
 cv= KFold(5,shuffle=True,random_state=0)
 classifiers= [clf_cb,clf_kn,clf_dt,clf_sv,clf_rf,clf_ada,clf_gnb,clf_xgb,clf_lgbm,clf_catb]
 
@@ -136,6 +137,7 @@ def check_model(X,y,classifiers,cv):
     Tests multiple models
     Returns: several metrics
     """
+    from sklearn.model_selection import cross_validate
     model_tbl= pd.DataFrame()
     row_idx=0
     for clf in classifiers:
