@@ -208,8 +208,10 @@ X_isol= X.loc[mask,:]
 y_isol= y[mask]
 isolf_models= check_model(X_isol, y_isol, classifiers, cv)
 display(isolf_models)
-## === Elliptic Envelope
-from sklearn.covariance import EllipticEnvelope # for detecting outliers in a Gaussian distributed dataset.
+
+## ============ Elliptic Envelope ============
+## - Detects outliers in a Gaussian distributed dataset.
+from sklearn.covariance import EllipticEnvelope 
 ee= EllipticEnvelope(contamination=.1,assume_centered=True,random_state=0)
 yhat= ee.fit_predict(X)
 mask= (yhat!=-1)
